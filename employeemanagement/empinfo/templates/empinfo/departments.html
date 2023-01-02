@@ -1,0 +1,42 @@
+{% extends 'empinfo/base.html' %} {% block title %}Index Page{% endblock %}
+
+{% block nav_home%}{% endblock %}
+{% block nav_emp%}{% endblock %}
+{% block nav_dep%}active{% endblock %}
+
+{% block page_content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5 text-center">
+            <h2>All Departments</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <form action="/departments/add" method="get">
+                {% csrf_token %}
+                <button class="btn btn-secondary">
+                    Click here to Add a New Department
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        {% for department in departments %}
+        <div class="col-4 mt-5 text-center">
+            <form class="form-control card" action="/departments/{{ department.id }}/" method="get">
+                {% csrf_token %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ department.name }}</h5>
+                    <p class="card-text">{{ department.description }}</p>
+                    <button class="btn btn-primary">View</button>
+                    <a class="btn btn-success text-white" href='/departments/{{ department.id }}/edit/'>Edit</a>
+                </div>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

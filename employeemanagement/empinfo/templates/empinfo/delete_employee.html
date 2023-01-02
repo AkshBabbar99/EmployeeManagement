@@ -1,0 +1,27 @@
+{% extends 'empinfo/base.html' %}
+{% block title %}Confirm Delete{% endblock %}
+
+{% block nav_home%}{% endblock %}
+{% block nav_emp%}active{% endblock %}
+{% block nav_dep%}{% endblock %}
+
+{% block page_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5 text-center">
+            <h4>Are you sure you want to delete: {{ employee.first_name }} {{ employee.last_name }}?</h4>
+        </div>
+    </div>
+    <form method="post">
+        <div class="row">
+            {% csrf_token %}
+            <div class="col-6 mt-5 text-center">
+                <button type="submit" class="btn btn-danger w-75">Yes, Delete this employee</button>
+            </div>
+            <div class="col-6 mt-5 text-center">
+                <a class="btn btn-secondary text-white w-75" href="/employees">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

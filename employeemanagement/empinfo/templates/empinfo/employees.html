@@ -1,0 +1,43 @@
+{% extends 'empinfo/base.html' %} {% block title %}Employee List{% endblock %}
+
+{% block nav_home%}{% endblock %}
+{% block nav_emp%}active{% endblock %}
+{% block nav_dep%}{% endblock %}
+
+{% block page_content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5 text-center">
+            <h2>All Employees</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <form action="/employees/add" method="get">
+                {% csrf_token %}
+                <button class="btn btn-secondary">
+                    Click here to Add a New Employee
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        {% for employee in employees %}
+        <div class="col-4 mt-5 text-center">
+            <form class="form-control card" action="/employees/{{ employee.employee_id }}/" method="get">
+                {% csrf_token %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ employee.first_name }} {{ employee.last_name }}</h5>
+                    <p class="card-text">Department: {{ employee.department }}</p>
+                    <p class="card-text">ID: {{ employee.employee_id }}</p>
+                    <button class="btn btn-primary">View</button>
+                    {% comment %} <a class="btn btn-success text-white" href='/departments/{{ department.id }}/edit/'>Edit</a> {% endcomment %}
+                </div>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

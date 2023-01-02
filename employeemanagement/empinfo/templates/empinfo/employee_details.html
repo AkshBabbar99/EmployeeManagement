@@ -1,0 +1,53 @@
+{% extends 'empinfo/base.html' %} {% block title %}Employee Information{% endblock %}
+
+{% block nav_home%}{% endblock %}
+{% block nav_emp%}active{% endblock %}
+{% block nav_dep%}{% endblock %}
+
+{% block page_content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5 text-center">
+            <h2>Employee Information</h2>
+        </div>
+    </div>
+    {% comment %} <div class="row">
+        <div class="col-12 text-center">
+            <form action="/departments/{{ department.id }}/edit" method="get">
+                {% csrf_token %}
+                <button class="btn btn-secondary">
+                    Edit Department
+                </button>
+                <a href="/departments/{{ department.id }}/delete" class="btn btn-danger">
+                    Delete Department
+                </a>
+            </form>
+        </div>
+    </div> {% endcomment %}
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-auto offset-4 mt-3">
+            <form class="form-control card" action="edit" method="get">
+                {% csrf_token %}
+                <div class="card-body">
+                    <h4 class="card-title">Name: {{ employee.first_name }} {{employee.last_name}}</h4>
+                    <p class="card-text mt-5">Employee ID: {{ employee.employee_id }}</p>
+                    <p class="card-text">Email: {{ employee.email }}</p>
+                    <p class="card-text">DOB: {{ employee.date_of_birth }}</p>
+                    <p class="card-text">Job Title: {{ employee.job_title }}</p>
+                    <p class="card-text">Department: {{ employee.department }}</p>
+                    <p class="card-text">Salary: {{ employee.salary }}</p>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <a href="/employees/{{employee.employee_id}}/delete" class="btn btn-danger">
+                        Delete
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
