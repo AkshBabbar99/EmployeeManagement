@@ -1,0 +1,51 @@
+{% extends 'empinfo/base.html' %} {% block title %}{{ department.name }}{% endblock %}
+
+{% block nav_home%}{% endblock %}
+{% block nav_emp%}{% endblock %}
+{% block nav_dep%}active{% endblock %}
+
+{% block page_content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5 text-center">
+            <h2>{{ department.name }}</h2>
+            <p class="blockquote">{{ department.description }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <form action="/departments/{{ department.id }}/edit" method="get">
+                {% csrf_token %}
+                <button class="btn btn-secondary">
+                    Edit Department
+                </button>
+                <a href="/departments/{{ department.id }}/delete" class="btn btn-danger">
+                    Delete Department
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 mt-4 text-center">
+            <h3>List of Employees in this Department</h3>
+        </div>
+    </div>
+    <div class="row">
+        {% for employee in employees %}
+            <div class="col-4 mt-3 text-center">
+                <form class="form-control card" action="/employees/{{ employee.employee_id }}" method="get">
+                {% csrf_token %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ employee.first_name }} {{employee.last_name}}</h5>
+                    <p class="card-text">Employee ID: {{ employee.employee_id }}</p>
+                    <button class="btn btn-primary">View Employee</button>
+                </div>
+            </form>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

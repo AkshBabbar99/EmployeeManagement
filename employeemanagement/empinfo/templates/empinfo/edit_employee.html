@@ -1,0 +1,41 @@
+{% extends 'empinfo/base.html' %}
+{% block title %}Edit Employee {{ employee.first_name }}{% endblock %}
+
+{% block nav_home%}{% endblock %}
+{% block nav_emp%}active{% endblock %}
+{% block nav_dep%}{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block page_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5 text-center">
+            <h2>Edit Employee Information</h2>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <form method="post" class="card p-5">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="form-group row mt-5">
+            <div class="col-6 text-center">
+                <button type="submit" class="btn btn-primary w-50">Save</button>
+            </div>
+            <div class="col-6 text-center">
+                <a class="btn btn-danger w-50 text-white" href="/employees/{{ employee.employee_id }}">Cancel</a>
+            </div>
+        </div>
+        {% if error_message %}
+        <div class="form-group row m-0 p-0">
+            <div class="col-12">
+                <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}
